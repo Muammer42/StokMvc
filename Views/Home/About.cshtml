@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "About";
+}
+@*<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>*@
+<br />
+<br />
+<form method="get">
+
+    <fieldset>
+        Ürünler <select id="MovieType" name="MovieType" class="form-control">
+
+            <option value=""></option>
+
+            <option value="0">Action</option>
+
+            <option value="1">Drama</option>
+
+            <option selected="selected" value="2">Comedy</option>
+
+            <option value="3">Science Fiction</option>
+
+        </select>
+        <br />
+
+        <button type="submit" class="btn btn-success">Kaydet</button>
+
+        @*<p><input type="submit" value="Submit" /> </p>*@
+
+    </fieldset>
+
+</form>

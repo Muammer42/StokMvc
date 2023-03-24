@@ -1,0 +1,52 @@
+﻿@using StokMvc.Models.Entity
+@model List<TBLKATEGORILER>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+    <div class="container">
+        
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Kategori ID</th>
+                    <th>Kategori Adı</th>
+                    <th>Sil</th>
+                    <th>Güncelle</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var ktgr in Model)
+                {
+                    <tr class="active">
+                        <td>@ktgr.KATEGORIID</td>
+                         <td>@ktgr.KATEGORIAD</td>
+                         <td><a href="/Kategori/Sil/@ktgr.KATEGORIID" class="btn btn-danger">SİL</a></td>
+                         <td><a href="/Kategori/KategoriGetir/@ktgr.KATEGORIID" class="btn btn-success">GÜNCELLE</a></td>
+                       
+
+                          </tr>
+                }
+
+               
+            </tbody>
+        </table>
+        <a href="/Kategori/YeniKategori/" class="btn btn-primary">Yeni Kategori Ekle</a>
+    </div>
+
+</body>
+</html>
+
