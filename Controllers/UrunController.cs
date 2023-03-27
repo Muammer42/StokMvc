@@ -19,7 +19,11 @@ namespace StokMvc.Controllers
         }
         [HttpGet]
         public ActionResult YeniUrunEkle()
-        { 
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("YeniUrunEkle");
+            }
             List<SelectListItem>degerler=(from i in db.TBLKATEGORILER.ToList()
                 select new SelectListItem
                 {
@@ -55,6 +59,34 @@ namespace StokMvc.Controllers
 
             return RedirectToAction("Index");
 
+        }
+        public ActionResult UrunGetir(int id)
+        {
+            var urun = db.TBLURUNLER.Find(id);
+            List<SelectListItem> degerler = (from i in db.TBLKATEGORILER.ToList()
+                                            select new SelectListItem
+                                            {
+                                                Text = i.KATEGORIAD,
+                                                Value = i.KATEGORIID.ToString()
+
+                                            }).ToList();
+
+            ViewBag.dgr = degerler;
+            return View("UrunGetir", urun);
+        }
+        public ActionResult Guncelle(TBLURUNLER p)
+        {
+            var urun = db.TBLURUNLER.Find(p.URUNID);
+            urun.URUNAD = p.URUNAD;
+            urun.MARKA = p.MARKA;
+            urun.STOK = p.STOK;
+            urun.FIYAT = p.FIYAT;
+            //urun.URUNKATEGORI = p.URUNKATEGORI;
+
+            var ktg = db.TBLKATEGORILER.Where(m => m.KATEGORIID == p.TBLKATEGORILER.KATEGORIID).FirstOrDefault();
+            urun.URUNKATEGORI = ktg.KATEGORIID;
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }

@@ -6,6 +6,14 @@
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
+@using (Html.BeginForm("Index","Musteri",FormMethod.Get))
+            {
+                <p>
+                  <b>Aranacak Müşteri Adı:</b>  @Html.TextBox("p")
+                    <input type="submit"value="Ara" />
+                </p>
+            }
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,7 +28,10 @@
 
     <div class="container">
 
-        <table class="table">
+        <table class="table" id="tbl1">
+
+
+
             <thead>
                 <tr>
                     <th>Müsteri ID</th>
@@ -28,6 +39,7 @@
                     <th>Müsteri Soyadı</th>
                     <th>Sil</th>
                     <th>Güncelle</th>
+                    <th>Alert</th>
 
                 </tr>
             </thead>
@@ -40,18 +52,23 @@
                         <td>@mstr.MUSTERIAD</td>
                         <td>@mstr.MUSTERISOYAD</td>
                         <td><a href="/Musteri/Sil/@mstr.MUSTERIID" class="btn btn-danger">SİL</a></td>
-                        <td><a href="/Musteri/Güncelle/@mstr.MUSTERIID" class="btn btn-success">GÜNCELLE</a></td>
+                        <td><a href="/Musteri/MusteriGetir/@mstr.MUSTERIID" class="btn btn-success">GÜNCELLE</a></td>
+                        <td>
+                            @Html.ActionLink("SİL BUTONU", "SIL", new { id = mstr.MUSTERIID }
+                   , new { @class = "btn btn-warning", onclick = "return confirm('Gerçekten Silmek İstiyormusunuz?')" })
+                    </td>
 
 
-
-                    </tr>
-                }
+                </tr>
+            }
 
 
                 </tbody>
             </table>
             <a href="/Musteri/YeniMusteri/" class="btn btn-primary">Yeni Müşteri Ekle</a>
-        </div>
+           
+    
+    </div>
 
     </body>
 </html>
